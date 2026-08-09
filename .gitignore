@@ -1,0 +1,19 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# 生成物（合成ラスター・COG・計測ログ。再現可能なのでコミットしない）
+data/
+
+# Env / tooling
+.env
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/

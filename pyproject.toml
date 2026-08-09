@@ -1,0 +1,42 @@
+[project]
+name = "cogstac"
+version = "0.1.0"
+description = "COG の部分読み出し(HTTP Range)を実測し、STAC カタログを自作する学習用ラボ。"
+readme = "README.md"
+authors = [
+    { name = "Tsubasa Moriguchi", email = "wing787tsubasa.m@gmail.com" }
+]
+requires-python = ">=3.12"
+# GDAL は pip で入れない（ビルド済み C ライブラリと版を合わせる必要があり、典型的な依存地獄）。
+# システム側の GDAL(homebrew) とその Python バインディングを使う。README の前提条件を参照。
+# ここに載せるのは「GDAL 無しで動く純粋ロジック」の依存だけに留める。
+dependencies = []
+
+[build-system]
+requires = ["uv_build>=0.11.3,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "mypy>=2.2.0",
+    "pytest>=9.1.1",
+    "ruff>=0.15.21",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+# GDAL の Python バインディングは型スタブを同梱しないため import エラーを抑止。
+[[tool.mypy.overrides]]
+module = ["osgeo.*", "numpy.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
