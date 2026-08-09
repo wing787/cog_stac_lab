@@ -123,7 +123,7 @@ strip 側が 645 リクエストに膨らむのは、8行おきの間引き読�
 
 ## 6. ベクター側（GeoParquet）との対応
 
-`small_road_network_pipeline` の M3 タスク1 と並べると、同じ骨格が見える。
+姉妹リポジトリ `small_road_network_pipeline`（GeoParquet on S3）と並べると、同じ骨格が見える。
 
 | | GeoParquet on S3 | COG on S3 |
 | --- | --- | --- |

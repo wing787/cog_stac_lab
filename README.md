@@ -2,15 +2,21 @@
 
 COG（Cloud Optimized GeoTIFF）の**部分読み出しが本当に転送量を減らすのか**を、
 体感や実行時間ではなく **HTTP Range GET の実バイト数**で測るための小さなラボ。
-続けて STAC カタログの自作（M3 タスク3）もここで扱う。
+続けて STAC カタログの自作もここで扱う。
 
-- 学習ロードマップ: M3 クラウドネイティブGIS
-- 姉妹リポジトリ: `small_road_network_pipeline`（ベクター側 = GeoParquet on S3）
+> **姉妹リポジトリ: [small_road_network_pipeline](https://github.com/wing787/small_road_network_pipeline)（ベクター側）**
+>
+> クラウド上の地理データを部分的に読む仕組みは、ラスターもベクターも土台は
+> **HTTP Range GET** で同じ。違うのは「何を最小単位に刈るか」だけ。
+> 対応表は [docs/cog-partial-read.md](docs/cog-partial-read.md) の 6 節。
+>
+> 両者に共通する結論は
+> **「転送量はファイルレイアウトとクエリの書き方の両方が揃って初めて下がる」**。
 
 ## 前提条件
 
 GDAL は **pip で入れない**。ビルド済み C ライブラリと版を合わせる必要があり、
-GIS で最も典型的な依存地獄になるため（この問題こそ M1 の Docker 化の動機）。
+GIS で最も典型的な依存地獄になるため（コンテナ化が標準解とされる理由でもある）。
 
 ```bash
 brew install gdal          # gdal_translate / gdalinfo と Python バインディング
