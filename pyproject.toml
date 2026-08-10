@@ -10,7 +10,9 @@ requires-python = ">=3.12"
 # GDAL は pip で入れない（ビルド済み C ライブラリと版を合わせる必要があり、典型的な依存地獄）。
 # システム側の GDAL(homebrew) とその Python バインディングを使う。README の前提条件を参照。
 # ここに載せるのは「GDAL 無しで動く純粋ロジック」の依存だけに留める。
-dependencies = []
+dependencies = [
+    "pystac[validation]>=1.15.2",
+]
 
 [build-system]
 requires = ["uv_build>=0.11.3,<0.12.0"]
