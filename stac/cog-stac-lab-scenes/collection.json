@@ -1,0 +1,59 @@
+{
+  "type": "Collection",
+  "id": "cog-stac-lab-scenes",
+  "stac_version": "1.1.0",
+  "description": "\u5408\u6210\u30e9\u30b9\u30bf\u30fc\u304b\u3089\u4f5c\u3063\u305fCOG \u30b7\u30fc\u30f3\u306e\u30b3\u30ec\u30af\u30b7\u30e7\u30f3\uff08\u90e8\u5206\u8aad\u307f\u51fa\u3057\u306e\u691c\u8a3c\u7528\uff09",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./scene_ne/scene_ne.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "item",
+      "href": "./scene_nw/scene_nw.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "item",
+      "href": "./scene_se/scene_se.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "item",
+      "href": "./scene_sw/scene_sw.json",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          138.9695817,
+          35.2861418,
+          140.2120332,
+          36.514085
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2026-07-01T01:30:00Z",
+          "2026-08-01T01:30:00Z"
+        ]
+      ]
+    }
+  },
+  "license": "MIT"
+}

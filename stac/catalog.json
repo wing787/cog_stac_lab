@@ -1,0 +1,18 @@
+{
+  "type": "Catalog",
+  "id": "cog-stac-lab",
+  "stac_version": "1.1.0",
+  "description": "\u5408\u6210\u30e9\u30b9\u30bf\u30fc\u304b\u3089\u4f5c\u3063\u305fCOG \u30b7\u30fc\u30f3\u306e\u30ab\u30bf\u30ed\u30b0\uff08\u90e8\u5206\u8aad\u307f\u51fa\u3057\u306e\u691c\u8a3c\u7528\uff09",
+  "links": [
+    {
+      "rel": "root",
+      "href": "./catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "child",
+      "href": "./cog-stac-lab-scenes/collection.json",
+      "type": "application/json"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [],
+  "id": "scene_ne",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          139.5845192,
+          36.5083696
+        ],
+        [
+          139.5954058,
+          35.901537
+        ],
+        [
+          140.2060593,
+          35.9071276
+        ],
+        [
+          140.199904,
+          36.514085
+        ],
+        [
+          139.5845192,
+          36.5083696
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    139.5845192,
+    35.901537,
+    140.2060593,
+    36.514085
+  ],
+  "properties": {
+    "datetime": "2026-07-01T01:30:00Z"
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {
+    "image": {
+      "href": "../../../data/scenes/scene_ne.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Cloud Optimized GeoTIFF",
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "collection": "cog-stac-lab-scenes"
+}
