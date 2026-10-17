@@ -1,7 +1,9 @@
 {
   "type": "Feature",
   "stac_version": "1.1.0",
-  "stac_extensions": [],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json"
+  ],
   "id": "scene_ne",
   "geometry": {
     "type": "Polygon",
@@ -37,6 +39,19 @@
     36.514085
   ],
   "properties": {
+    "proj:code": "EPSG:32654",
+    "proj:shape": [
+      3329,
+      2725
+    ],
+    "proj:transform": [
+      20.225098886509166,
+      0.0,
+      373246.0880429117,
+      0.0,
+      -20.225098886509166,
+      4041268.087423781
+    ],
     "datetime": "2026-07-01T01:30:00Z"
   },
   "links": [

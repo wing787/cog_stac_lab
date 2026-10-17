@@ -108,6 +108,7 @@ def build_item(meta: SceneMetadata) -> pystac.Item:
 
     ``bbox`` は geometry から導出する。両方を :class:`SceneMetadata` に持たせないのは、
     食い違った状態をそもそも作れなくするため。
+    また、proj 拡張で native CRS の情報を持つ。
     """
     item = pystac.Item(
         id=meta.scene_id,
@@ -117,6 +118,17 @@ def build_item(meta: SceneMetadata) -> pystac.Item:
         # pystac は datetime をこの dict に書き込むので、書き込み先が要る（None は不可）。
         properties={},
     )
+    # 投影情報（proj 拡張 v2.0.0）。geometry は GeoJSON の決まりで WGS84 に潰れるので、
+    # native CRS・ピクセル数・アフィン変換をここで取り戻す。
+    # これがあると、クライアントは COG を開かずに「どの CRS で何ピクセルか」が分かる。
+    item.ext.add("proj")
+    proj = item.ext.proj
+    # SceneMetadata のどれか。pystac が "EPSG:xxxx" の proj:code に変換して書く
+    proj.epsg = meta.epsg
+    # (rows, cols) の順。list で渡す
+    proj.shape = list(meta.shape)
+    # affine 順の6要素。list で渡す
+    proj.transform = list(meta.transform)
     item.add_asset(
         key=_DATA_ASSET_KEY,
         asset=pystac.Asset(

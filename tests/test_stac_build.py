@@ -128,3 +128,25 @@ def test_union_bbox_accepts_a_generator() -> None:
     """
     bboxes = [[0.0, 0.0, 1.0, 1.0], [10.0, -5.0, 11.0, 2.0]]
     assert union_bbox(b for b in bboxes) == union_bbox(bboxes)
+
+
+def test_item_declares_projection_extension() -> None:
+    """拡張を宣言しないと、proj:* のキーがあってもバリデータは検証しない。"""
+    item = build_item(_metadata())
+    assert any("projection" in uri for uri in item.stac_extensions)
+
+
+def test_item_projection_uses_proj_code_not_epsg() -> None:
+    """proj 拡張 v2.0.0 では proj:epsg は廃止、proj:code に置き換わった。
+
+    gdalinfo の stac キーは旧仕様の proj:epsg を出すので、
+    それを丸ごと流し込む変更が入ったらここで落ちる。
+    """
+    props = build_item(_metadata()).to_dict()["properties"]
+    assert props["proj:code"] == "EPSG:32654"
+    assert "proj:epsg" not in props
+
+
+def test_item_projection_shape_is_rows_then_cols() -> None:
+    props = build_item(_metadata()).to_dict()["properties"]
+    assert props["proj:shape"] == [3329, 2724]
