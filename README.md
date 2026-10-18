@@ -2,7 +2,8 @@
 
 COG（Cloud Optimized GeoTIFF）の**部分読み出しが本当に転送量を減らすのか**を、
 体感や実行時間ではなく **HTTP Range GET の実バイト数**で測るための小さなラボ。
-続けて STAC カタログの自作もここで扱う。
+続けて STAC カタログを自作し、**どのシーンを読むか「選ぶ」コスト**も同じ物差しで測る
+（[docs/stac-catalog.md](docs/stac-catalog.md)）。
 
 > **姉妹リポジトリ: [small_road_network_pipeline](https://github.com/wing787/small_road_network_pipeline)（ベクター側）**
 >
@@ -71,3 +72,18 @@ python3 scripts/measure_cog_transfer.py \
 | 全域を 750×750 で俯瞰 | 28.72 MB / **644 req** | 0.25 MB / **1 req** | **117×** |
 
 （S3 実測。ローカル HTTP でもほぼ同値）
+
+## STAC カタログ
+
+4 シーンの COG から Catalog → Collection → Item を pystac で組み立て、
+空間と時間で絞り込み、選んだ 1 枚だけを部分読みする。詳細と再現手順は
+[docs/stac-catalog.md](docs/stac-catalog.md)。
+
+| 段階 | GET | 転送量 |
+| --- | ---: | ---: |
+| カタログで選ぶ（4 枚 → 1 枚） | 6 | 8.1 KB |
+| 選んだ 1 枚を部分読み（512² 窓） | 2 | 98.3 KB |
+| (比較) カタログ無しでヘッダを 4 枚読む | 4 | 65.5 KB（撮影日時では絞れない） |
+
+**静的カタログは GET 回数を減らさない**（N+2 vs N）。勝つのはバイト数（約 1/10）と、
+TIFF ヘッダに無い撮影日時で絞れること。回数を定数にするには STAC API か stac-geoparquet が要る。
